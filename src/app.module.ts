@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ProductsModule } from './products/products.module.js';
+import { UsersModule } from './users/users.module.js';
+import { AuthModule } from './auth/auth.module.js';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { ProductsModule } from './products/products.module.js';
     }),
 
     ProductsModule,
+    UsersModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
