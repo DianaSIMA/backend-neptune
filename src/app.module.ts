@@ -4,6 +4,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ProductsModule } from './products/products.module.js';
 import { UsersModule } from './users/users.module.js';
 import { AuthModule } from './auth/auth.module.js';
+import { FavoritesModule } from './favorites/favorites.module.js';
 
 @Module({
   imports: [
