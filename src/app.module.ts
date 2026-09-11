@@ -33,6 +33,7 @@ import { AuthModule } from './auth/auth.module.js';
     ProductsModule,
     UsersModule,
     AuthModule,
+    FavoritesModule,
   ],
 })
 export class AppModule {}
