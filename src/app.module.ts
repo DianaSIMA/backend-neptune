@@ -4,6 +4,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ProductsModule } from './products/products.module.js';
 import { UsersModule } from './users/users.module.js';
 import { AuthModule } from './auth/auth.module.js';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -17,8 +18,16 @@ import { AuthModule } from './auth/auth.module.js';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
+
       autoLoadModels: true,
       synchronize: true,
+
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
+        },
+      },
     }),
 
     ProductsModule,
