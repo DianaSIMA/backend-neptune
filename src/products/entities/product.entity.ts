@@ -27,6 +27,18 @@ export class Product extends Model<Product> {
   declare category: string;
 
   @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  declare type: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  declare shape: string;
+
+  @Column({
     type: DataType.DECIMAL,
     allowNull: false,
   })
