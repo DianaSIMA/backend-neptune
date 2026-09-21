@@ -52,7 +52,12 @@ export class FavoritesService {
       productId,
     });
   }
-
+async getFavorites(userId: number) {
+  return this.favoriteModel.findAll({
+    where: { userId },
+    include: [Product],
+  });
+}
   async removeFavorite(userId: number, productId: number) {
     const favorite = await this.favoriteModel.findOne({
       where: {

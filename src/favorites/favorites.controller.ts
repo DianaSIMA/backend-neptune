@@ -1,5 +1,15 @@
-import { Body, Controller, Delete, Post } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
+
 import { FavoritesService } from './favorites.service.js';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
 
 @Controller('favorites')
 export class FavoritesController {
@@ -7,23 +17,36 @@ export class FavoritesController {
     private readonly favoritesService: FavoritesService,
   ) {}
 
-  @Post()
+  // Ajouter un favori
+  @Post(':productId')
+  @UseGuards(JwtAuthGuard)
   async addFavorite(
-    @Body() body: { userId: number; productId: number },
+    @Param('productId') productId: string,
+    @Req() req: any,
   ) {
     return this.favoritesService.addFavorite(
-      body.userId,
-      body.productId,
+      req.user.sub,
+      Number(productId),
     );
   }
 
-  @Delete()
+  // Récupérer les favoris
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  async getFavorites(@Req() req: any) {
+    return this.favoritesService.getFavorites(req.user.sub);
+  }
+
+  // Supprimer un favori
+  @Delete(':productId')
+  @UseGuards(JwtAuthGuard)
   async removeFavorite(
-    @Body() body: { userId: number; productId: number },
+    @Param('productId') productId: string,
+    @Req() req: any,
   ) {
     return this.favoritesService.removeFavorite(
-      body.userId,
-      body.productId,
+      req.user.sub,
+      Number(productId),
     );
   }
 }
